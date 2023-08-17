@@ -1,0 +1,127 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.payment-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.payment-title {
+    font-weight: 500;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.payment-product {
+    margin-bottom: 30px;
+}
+
+.payment-product .product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.payment-product .product-info {
+    display: flex;
+    align-items: center;
+}
+
+.payment-product .product-name {
+    font-weight: 500;
+}
+
+.payment-form {
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.payment-form label {
+    font-weight: 500;
+}
+
+.payment-form {
+    height: 40px;
+}
+
+.payment-form .btn-primary {
+    background-color: #635bff;
+    border-color: #635bff;
+}
+
+.payment-form .btn-primary:hover {
+    background-color: #4e4cb8;
+    border-color: #4e4cb8;
+}
+
+.credit-card {
+    border-radius: 5px;
+    border: 1px solid #ebebeb;
+    padding: 10px;
+}
+
+.credit-card input {
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 16px;
+    padding: 0 5px;
+}
+
+.credit-card .input-group {
+    display: flex;
+    align-items: center;
+}
+
+.credit-card .input-group > div {
+    width: 1px;
+    height: 100%;
+    background-color: #ebebeb;
+}
+
+.credit-card {
+    margin-right: 5px;
+}
+
+.credit-card .icon-container i {
+    color: #adb5bd;
+}
+
+
+.spinner-border-custom {
+    display: none;
+}
+
+.loading .button-text {
+    display: none;
+}
+
+.loading .spinner-border-custom {
+    display: inline-block;
+}
+
+.btn-primary.selected {
+    background-color: #007bff;
+    color: #fff;
+}
+
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+input[type="radio"]:checked + label {
+    background-color: #007bff;
+    color: #fff;
+}
