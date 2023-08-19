@@ -1,8 +1,8 @@
 from __future__ import absolute_import, unicode_literals
 
-from celery import shared_task
+from payment.celery import app
 
 
-@shared_task
-def add(x, y):
-    return x + y
+@app.task
+def send_payment_credit(data):
+    print('Pagando com cartão de crédito')
