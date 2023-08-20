@@ -20,7 +20,6 @@ form.addEventListener('submit', async function (event) {
         console.log(result)
         if (!result) {
             throw new Error('Error in getCard');
-
         }
         var encryptedField = form.querySelector('input[name="encrypted_card"]');
         if (!encryptedField) {

@@ -11,6 +11,10 @@ async function getPublicKey() {
 
 async function getCard(holder, number, expMonth, expYear, securityCode) {
     try {
+        if(number.toString().length !== 16){
+            setErrorCardNumber();
+            return null;
+        }
         const publicKey = await getPublicKey();
         if (!publicKey) {
             console.error("Não foi possível obter a chave pública");
@@ -25,11 +29,28 @@ async function getCard(holder, number, expMonth, expYear, securityCode) {
             expYear,
             securityCode
         });
-        console.log(card.hasErrors);
-        console.log(card.errors);
+        clearErrors();
+        if (card.errors && card.errors.length > 0) {
+            for (const error of card.errors) {
+                if (error.code === "INVALID_NUMBER") {
+                    setErrorCardNumber();
+                }
+                if (error.code === "INVALID_EXPIRATION_MONTH" ||
+                    error.code === "INVALID_EXPIRATION_YEAR") {
+                    setErrorExpiryDate();
+                }
+                if (error.code === "INVALID_SECURITY_CODE") {
+                    setErrorCvv();
+                }
+            }
+        }
         return card.encryptedCard;
     } catch (error) {
         console.error("Ocorreu um erro:", error);
         return null;
     }
 }
+
+
+
+

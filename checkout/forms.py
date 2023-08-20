@@ -22,7 +22,6 @@ class PaymentForm(forms.Form):
 
 
 class CustomerForm(forms.Form):
-    encrypted_card = forms.CharField()
     name = forms.CharField()
     email = forms.EmailField()
     tax_id = forms.CharField(validators=[
@@ -35,11 +34,12 @@ class CustomerForm(forms.Form):
 
 
 class CardForm(CustomerForm):
-    cardholder_name = forms.CharField()
-    card_number = forms.CharField(
-        validators=[RegexValidator(r'^\d{4} \d{4} \d{4} \d{4}$', 'Número de cartão inválido')]
-    ,required=False)
-    expiry_date = forms.CharField(required=False)
+    encrypted_card = forms.CharField()
+    cardholder_name = forms.CharField(min_length=2)
+    # card_number = forms.CharField(
+    #     validators=[RegexValidator(r'^\d{4} \d{4} \d{4} \d{4}$',
+    #                                'Número de cartão inválido')])
+    # expiry_date = forms.CharField()
     cvv = forms.CharField()
 
     def __init__(self, *args, **kwargs):
@@ -49,7 +49,6 @@ class CardForm(CustomerForm):
 
 class CreditCardForm(CardForm):
     def save(self):
-        credit_card(self.cleaned_data)
+        pass
+        # credit_card(self.cleaned_data)
         # send_payment_credit.delay(self.cleaned_data)
-
-

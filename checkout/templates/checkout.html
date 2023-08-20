@@ -84,9 +84,19 @@
                     <input type="radio" id="boleto" name="ch_payment" value="boleto">
                     <input type="radio" id="pix" name="ch_payment" value="pix">
 
-
                     <div class="mb-2">
-                        <label for="email" class="form-label">E-mail</label>
+                        <label for="email" class="form-label m-0">E-mail</label>
+                        {% if form.errors %}
+                            <div class="errorlist">
+
+                                <ul>
+                                    {% if form.errors.email %}
+                                        <span class="text-danger m-0 p-0">{{ form.errors.email }}</span>
+                                    {% endif %}
+                                </ul>
+
+                            </div>
+                        {% endif %}
                         <input type="text" class="form-control px-3" name="email" id="email"
                                value="johndoe@hotmail.com"
                                required>
@@ -95,14 +105,37 @@
                     <input type="hidden" class="form-control px-3" id="encrypted_card" required>
 
                     <div class="mb-2">
-                        <label for="tax_id" class="form-label">CPF/CNPJ</label>
+                        <label for="tax_id" class="form-label m-0">CPF/CNPJ</label>
+                        {% if form.errors %}
+                            <div class="errorlist">
+
+                                <ul>
+                                    {% if form.errors.tax_id %}
+                                        <span class="text-danger m-0 p-0">{{ form.errors.tax_id }}</span>
+                                    {% endif %}
+                                </ul>
+
+                            </div>
+                        {% endif %}
                         <input type="text" class="form-control px-3" name="tax_id" id="tax_id"
                                value="12345678909"
+                               maxlength="14"
                                required>
                     </div>
 
                     <div class="mb-2">
-                        <label for="cardholder-name" class="form-label">Nome no cartão</label>
+                        <label for="cardholder-name" class="form-label m-0">Nome no cartão</label>
+                        {% if form.errors %}
+                            <div class="errorlist">
+
+                                <ul>
+                                    {% if form.errors.cardholder_name %}
+                                        <span class="text-danger m-0 p-0">{{ form.errors.cardholder_name }}</span>
+                                    {% endif %}
+                                </ul>
+
+                            </div>
+                        {% endif %}
                         <input type="text" class="form-control px-3" name="cardholder_name" id="cardholder-name"
                                value="John Doe"
                                required>
@@ -112,11 +145,14 @@
                     <span>Informações do cartão</span>
 
                     <div class="credit-card mb-3 p-1 bg-white mt-1">
+                        <span id="error-card-number" class=" d-block text-danger" style="font-size: 10px;"></span>
                         <div class="input-group">
+
                             <input id="card-number-input" placeholder="1234 1234 1234 1234"
                                    type="text"
                                    class="form-control px-3"
                                    value="4242 4242 4242 4242"
+                                   name="card_number"
                                    required maxlength="19">
                             <i class="fab fa-cc-visa mx-1" style="font-size: 20px"></i>
                             <i class="fab fa-cc-mastercard mx-1" style="font-size: 20px"></i>
@@ -124,16 +160,29 @@
                             <i class="fab fa-cc-discover mx-1" style="font-size: 20px"></i>
                         </div>
                         <div style="width: 100%; height: 1.5px; background-color: #ebebeb;"></div>
-                        <div class="input-group">
-                            <input id="expiry-date-input" placeholder="MM / AA" type="text"
-                                   class="form-control px-3"
-                                   required
-                                   value="12/25"
-                                   maxlength="7">
-                            <input id="cvv" name="cvv" placeholder="CVV" type="text" class="form-control px-3"
-                                   required
-                                   value="123"
-                                   maxlength="3">
+                        <div class="d-flex align-items-center">
+                            <div style="background: transparent">
+                           <span id="error-card-date" class=" d-block text-danger"
+                                 style="font-size: 10px;">
+                                </span>
+                                <input id="expiry-date-input" placeholder="MM / AA" type="text"
+                                       class="form-control px-3"
+                                       required
+                                       value="12/25"
+                                       minlength="5"
+                                       maxlength="5">
+                            </div>
+                            <div style="background: transparent">
+                                <span id="error-card-cvv" class=" d-block text-danger"
+                                      style="font-size: 10px;">
+                                </span>
+
+                                <input id="cvv" name="cvv" placeholder="CVV" type="text" class="form-control px-3"
+                                       required
+                                       value="123"
+                                       minlength="3"
+                                       maxlength="3">
+                            </div>
                             <i class="fas fa-lock mx-2"></i>
                         </div>
                     </div>
@@ -150,7 +199,7 @@
     </div>
 </div>
 
-
+<script src="{% static 'checkout/js/cardErrors.js' %}"></script>
 <script src="{% static 'checkout/js/select_option.js' %}"></script>
 <script src="{% static 'checkout/js/encrypt_card.js' %}"></script>
 <script src="{% static 'checkout/js/validate_inputs.js' %}"></script>
