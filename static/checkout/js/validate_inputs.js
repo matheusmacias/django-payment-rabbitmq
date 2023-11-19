@@ -1,12 +1,9 @@
-const cardNumberInput = document.getElementById('card-number-input');
 cardNumberInput.addEventListener('input', formatCardNumber);
 cardNumberInput.addEventListener('keydown', allowOnlyNumbers);
 
-const expiryDateInput = document.getElementById('expiry-date-input');
 expiryDateInput.addEventListener('input', formatExpiryDate);
 expiryDateInput.addEventListener('keydown', allowOnlyNumbers);
 
-const cvvInput = document.getElementById('cvv');
 cvvInput.addEventListener('keydown', allowOnlyNumbers);
 
 const cpf_cnpjInput = document.getElementById('tax_id');

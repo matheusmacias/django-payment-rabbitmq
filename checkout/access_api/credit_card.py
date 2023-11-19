@@ -1,5 +1,7 @@
 from django.conf import settings
 import requests
+import uuid
+import json
 
 
 def credit_card(data):
@@ -10,7 +12,7 @@ def credit_card(data):
     }
 
     data = {
-        "reference_id": "ex-00001",
+        "reference_id": str(uuid.uuid4()),
         "customer": {
             "name": data['cardholder_name'],
             "email": data['email'],
@@ -33,7 +35,7 @@ def credit_card(data):
             }
         ],
         "notification_urls": [
-            "https://meusite.com/notificacoes"
+            "https://gladius.serveo.net/checkout/webhook_pagseguro/"
         ],
         "charges": [
             {
@@ -62,4 +64,5 @@ def credit_card(data):
 
     response = requests.post(url, headers=headers, json=data)
     print(response.text)
+    return response.text
 

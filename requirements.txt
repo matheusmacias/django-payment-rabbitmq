@@ -17,3 +17,4 @@ tzdata==2023.3
 vine==5.0.0
 wcwidth==0.2.6
 requests~=2.31.0
+channels~=4.0.0

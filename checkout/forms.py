@@ -49,6 +49,4 @@ class CardForm(CustomerForm):
 
 class CreditCardForm(CardForm):
     def save(self):
-        pass
-        # credit_card(self.cleaned_data)
-        # send_payment_credit.delay(self.cleaned_data)
+        send_payment_credit.delay(self.cleaned_data)
